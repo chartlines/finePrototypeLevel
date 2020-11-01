@@ -23,7 +23,7 @@ console.log(DD(dog, 'name'), DD(dog, 'yes'), DD(dog, 'show'));
 function printLevel (obj, key) {
   var level = 0;
   if (key in obj) {
-    while (!obj.hasOwnProperty(key)) {
+    while (!Object.prototype.hasOwnProperty.call(obj, key)) {
       obj = Object.getPrototypeOf(obj);
       level++;
     }
@@ -33,12 +33,13 @@ function printLevel (obj, key) {
   };
 }
 
+export default printLevel;
 console.log('printLevel', printLevel(dog, 'name'), printLevel(dog, 'yes'), printLevel(dog, 'show'));
 
 function displayKeyInfo (source, key) {
   function checkKey (obj, level) {
-    if (obj.hasOwnProperty(key)) return [level, obj[key]];
-    const proto = obj.__proto__;
+    if (Object.prototype.hasOwnProperty.call(obj, key)) return [level, obj[key]];
+    const proto = Object.getPrototypeOf(obj);
     if (!proto) return [null, undefined];
     return checkKey(proto, level + 1);
   }
