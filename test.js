@@ -1,3 +1,6 @@
+import test1 from './test1.js';
+import test2 from './test2.js';
+
 function printLevel (obj, key) {
   var level = 0;
   if (key in obj) {
@@ -11,36 +14,5 @@ function printLevel (obj, key) {
   };
 }
 
-/*
-const Animal = function () {};
-Animal.prototype = { walk: 123 };
-const SuperAnimal = function () {};
-SuperAnimal.prototype = { walk: 456 };
-const Dog = function () { Animal.call(this); };
-
-Dog.prototype = Object.setPrototypeOf(Dog.prototype, Animal.prototype);
-
-const d1 = new Dog();
-console.log(d1.walk);
-
-Dog.prototype = Object.setPrototypeOf(Dog.prototype, SuperAnimal.prototype);
-
-const d2 = new Dog();
-console.log(printLevel(d2, 'walk'), printLevel(d1, 'walk'));
-*/
-
-const Animal = function () {};
-Animal.prototype = { walk: 123 };
-const SuperAnimal = function () {};
-SuperAnimal.prototype = { walk: 456 };
-const Dog = function () { Animal.call(this); };
-
-Dog.prototype = Object.create(Animal.prototype);
-
-const d1 = new Dog();
-console.log(d1.walk);
-
-Dog.prototype = Object.create(SuperAnimal.prototype);
-
-const d2 = new Dog();
-console.log(printLevel(d2, 'walk'), printLevel(d1, 'walk'));
+test1(printLevel);
+test2(printLevel);
